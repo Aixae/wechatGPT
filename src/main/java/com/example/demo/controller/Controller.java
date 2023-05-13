@@ -109,9 +109,8 @@ public class Controller {
                             SendHttpUtils.post("https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token="+access_token,json);
                         }else if(res.getIntValue("errcode")!=0){
                             System.err.println(res);
-                            return "200";
                         }
-                        return "200";
+                        continue;
                     }
                     ChatGptRequestParameter parameter = new ChatGptRequestParameter();
                     parameter.addMessages(new ChatGptMessage("system",knowledgeMapper.selectById(1).getKnowledge()));
@@ -150,7 +149,6 @@ public class Controller {
                         SendHttpUtils.post("https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token="+access_token,json);
                     }else if(res.getIntValue("errcode")!=0){
                         System.err.println(res);
-                        return "200";
                     }
                 }else if(!"event".equals(o.getString("msgtype"))){
                     JSONObject json = new JSONObject();
@@ -169,7 +167,6 @@ public class Controller {
                         SendHttpUtils.post("https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token="+access_token,json);
                     }else if(res.getIntValue("errcode")!=0){
                         System.err.println(res);
-                        return "200";
                     }
                 }
             }
